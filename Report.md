@@ -1,7 +1,7 @@
 The application allows users to perform CRUD (Create, Read, Update, Delete) operations on a collection of books. Let's examine the code and its functionalities.
 
 *1. Importing Dependencies*
-The code begins by importing the necessary dependencies for the application: Flask, request, and jsonify. Flask is a micro web framework for building web applications in Python. Request is used to handle incoming HTTP requests, and jsonify is used to convert Python objects into JSON format.
+The code begins by importing  the necessary dependencies for the application: Flask, request, and jsonify. Flask is a micro web framework for building web applications in Python. Request is used to handle incoming HTTP requests, and jsonify is used to convert Python objects into JSON format.
 
 *2. Initializing the Flask Application*
 The Flask application is initialized using the `Flask(_name)` statement. The `name_` variable is a special Python variable that represents the name of the current module.
