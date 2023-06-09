@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Input Box Demo</title>
+  <script>
+    function fetchData() {
+      fetch('/data')
+        .then(response => response.json())
+        .then(data => {
+          var inputBox = document.getElementById("inputBox");
+          inputBox.value = data.data;
+          displayData(data.data);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    
+    function submitData() {
+      var input = document.getElementById("inputBox").value;
+      
+      fetch('/data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: input })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.message);
+          fetchData();
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    
+    function editData() {
+      var input = document.getElementById("inputBox").value;
+      
+      fetch('/data', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: input })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.message);
+          fetchData();
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    
+    function deleteData() {
+      fetch('/data', {
+        method: 'DELETE'
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.message);
+          fetchData();
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    
+    function displayData(data) {
+      var outputDiv = document.getElementById("output");
+      outputDiv.textContent = "Final Value: " + data;
+    }
+  </script>
+</head>
+<body>
+  <input type="text" id="inputBox" placeholder="Enter data">
+  <button onclick="submitData()">Submit</button>
+  <button onclick="editData()">Edit</button>
+  <button onclick="deleteData()">Delete</button>
+  
+  <div id="output"></div>
+  
+  <script>
+    // Fetch initial data on page load
+    fetchData();
+  </script>
+</body>
+</html>
